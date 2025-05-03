@@ -26,15 +26,13 @@ def max_streak_with_one_slip(arr):
     while i < len(arr):
         if arr[i] == 0:# start a streak
             streak = 1
-            slliped = 0
+            slipped = 0
             i += 1
-            while i < len(arr) and slliped < 3:
+            while i < len(arr) and slipped < 3:
                 if arr[i] == 0:
                     streak += 1
-                    i += 1
                 elif slipped == 0:
                     slipped += arr[i]
-                    streak += 1
                     i += 1
                 else:
                     break
