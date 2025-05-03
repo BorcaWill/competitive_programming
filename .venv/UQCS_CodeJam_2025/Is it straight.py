@@ -17,13 +17,10 @@ import sys
 
 def checkStraightLine(count, pts):
     # Write your code here
-    if [0,0] in pts:
-        pts.remove([0,0])
-        count -= 1
-    ratio = (pts[0][0]-pts[1][0]+10**4+1)/(pts[0][1]-pts[1][1]+10**4+1)
-
+    x = pts[0][0]
+    y = pts[0][1]
     for i in range(1,count-1):
-        if (pts[i][0]-pts[0][0]+10**4+1)/(pts[i][1]-pts[0][1]+10**4+1) != ratio:
+        if (pts[i][0]-x)*(pts[i+1][1]-y) != (pts[i+1][0]-x)*(pts[i][1]-y):
             return "false"
     return "true"
 
