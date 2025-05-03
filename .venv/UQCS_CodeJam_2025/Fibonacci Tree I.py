@@ -15,19 +15,15 @@ import sys
 
 def fibonacciLeaves(num):
     # Write your code here
-    if num == 0 or num == 1:
+    memo = (num+1) * [-1]
+    return fibRecursion(num,memo)
+def fibRecursion(n,memo):
+    if n == 0 or n == 1:
         return 1
-    elif num == 5:
-        return 8
-    elif num == 10:
-        return 89
-    elif num == 40:
-        return 102334155
-    elif num > 1:
-        return fibonacciLeaves(num - 1) + fibonacciLeaves(num - 2)
-    else: 
-        raise ValueError("Input must be a non-negative integer")
-    
+    if memo[n] != -1:
+        return memo[n]
+    memo[n] = fibRecursion(n - 1,memo) + fibRecursion(n - 2,memo)
+    return memo[n]
 
 if __name__ == '__main__':
     fptr = open(os.environ['OUTPUT_PATH'], 'w')
