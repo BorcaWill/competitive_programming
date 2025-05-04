@@ -17,26 +17,23 @@ import sys
 
 def solution(counts, words):
     # Write your code here
-    anagram_list = []
-    words_sets_list = []
-    words_list = []
+    anagram_map = {}
+    anagram_count = {}
     count = 0
+
     for word in words:
         word = word.lower()
-        candidate = set(word)
-        if word not in words_list:# is a different word
-            words_list.append(word)#register a different word
-            if candidate not in words_sets_list:#is a new set of alphas
-                words_sets_list.append(candidate)#register a new set of alphas
-            else:#is an anagram set
-                anagram_list.append(candidate)
-    words_list = []
-    for word in words:
-        word = word.lower()
-        candidate = set(word)
-        if word not in words_list:# is a different word
-            if candidate in anagram_list:#is an anagram
-                count += 1
+        sorted_word = "".join(sorted(word))
+        if sorted_word in anagram_map:
+            anagram_map[sorted_word].add(word)
+            anagram_count[sorted_word] += 1
+        else:
+            anagram_map[sorted_word] = {word}
+            anagram_count[sorted_word] = 1
+
+    for word, value in anagram_map.items():
+        if len(value) > 1:
+            count += anagram_count[word]
     return count
 
 if __name__ == '__main__':
