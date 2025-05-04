@@ -20,34 +20,19 @@ def max_streak_with_one_slip(arr):
     elif sum(arr) == 1:
         return len(arr)
     max_streak = 0
-    restored_i = 0
-    i = 0
-    slipped = 0
-    while i < len(arr):
-        if arr[i] == 0:# start a streak
-            streak = 1
-            slipped = 0
-            i += 1
-            while i < len(arr) and slipped < 3:
-                if arr[i] == 0:
-                    streak += 1
-                elif slipped == 0:
-                    slipped += arr[i]
-                    i += 1
-                else:
-                    break
-                if slipped < 2 or arr[i] == 0:
-                    streak += 1
-                i += 1
-                if slipped == 1:
-                    restored_i = i
-                    slipped = 2
-            if slipped >= 2:
-                i = restored_i
-            slipped = 0
-            max_streak = max(max_streak, streak)
-        else:
-            i += 1
+    left = 0
+    one_count = 0
+
+    for right in range(len(arr)):
+        if arr[right] == 1:
+            one_count += 1
+        # start a streak
+        while one_count > 1:
+            if arr[left] == 1:
+                one_count -= 1
+            left += 1
+        max_streak = max(max_streak, right - left + 1)  
+
     return max_streak
 
     
